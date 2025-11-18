@@ -208,7 +208,7 @@ export default function HomePage() {
     () => [
       {
         id: "folding-furniture",
-        image: loadImage("../assets/img/img6.jpg"),
+        image: loadImage("assets/img/img6.jpg"),
         title: "Bàn Ghế Xếp Gọn Dã Ngoại - Cắm Trại",
         subtitle: "",
         buttonText: "XEM NGAY",
@@ -220,7 +220,7 @@ export default function HomePage() {
       },
       {
         id: "camp-cooking",
-        image: loadImage("../assets/img/img2.jpg"),
+        image: loadImage("assets/img/img2.jpg"),
         title: "Bếp Nồi Du Lịch",
         subtitle: "Cho hoạt động ngoài trời",
         buttonText: "CHI TIẾT",
@@ -232,7 +232,7 @@ export default function HomePage() {
       },
       {
         id: "hiking-backpack",
-        image: loadImage("../assets/img/img3.jpg"),
+        image: loadImage("assets/img/img3.jpg"),
         title: "Balo Leo Núi",
         subtitle: "Trợ lực & xếp gọn",
         buttonText: "CHI TIẾT",
@@ -294,8 +294,8 @@ export default function HomePage() {
               />
               <div
                 className={`absolute top-6 space-y-3 ${card.align === "center"
-                    ? "left-1/2 -translate-x-1/2 text-center"
-                    : "left-0 pl-4 text-left"
+                  ? "left-1/2 -translate-x-1/2 text-center"
+                  : "left-0 pl-4 text-left"
                   }`}
               >
                 <div className="text-white">
@@ -315,8 +315,8 @@ export default function HomePage() {
                 <div className="flex justify-center items-center">
                   <button
                     className={`px-5 py-2 mx-auto text-lg cursor-pointer rounded-md transition-colors ${card.buttonVariant === "light"
-                        ? "bg-white/90 text-green-primary hover:bg-white"
-                        : "bg-green-primary text-white hover:bg-green-primary/90"
+                      ? "bg-white/90 text-green-primary hover:bg-white"
+                      : "bg-green-primary text-white hover:bg-green-primary/90"
                       }`}
                     onClick={() =>
                       handleNavigateHighlight(card.categoryId, card.searchFallback)
@@ -497,7 +497,7 @@ export default function HomePage() {
               <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl ">
                 <div>
                   <img
-                    src="/src/assets/img/leatherman-multitools-home.png.webp"
+                    src="/assets/img/leatherman-multitools-home.png.webp"
                     alt="tua vít"
                     className="size-full object-cover bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 rounded-lg"
                   />
