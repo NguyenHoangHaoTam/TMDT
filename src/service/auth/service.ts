@@ -1,3 +1,4 @@
+import axios from "axios";
 import type {
   ResponseLogin,
   ResponseRegister,
@@ -65,10 +66,19 @@ export async function register(body: TPayLoadRegister) {
       return res.data.data;
     }
 
-    toast.error("đăng ký thất bại");
-    return Promise.reject(new Error("đăng ký thất bại"));
+    const message = res?.data?.message || "Đăng ký thất bại";
+    toast.error(message);
+    return Promise.reject(new Error(message));
   } catch (e) {
-    toast.error("Đăng ký thất bại");
+    let message = "Đăng ký thất bại";
+
+    if (axios.isAxiosError(e)) {
+      message = e.response?.data?.message || e.message || message;
+    } else if (e instanceof Error) {
+      message = e.message || message;
+    }
+
+    toast.error(message);
 
     return Promise.reject(e);
   }
