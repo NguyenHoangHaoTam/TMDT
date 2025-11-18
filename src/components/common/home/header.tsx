@@ -22,14 +22,14 @@ export function CarouselPlugin({ className }: { readonly className?: string }) {
     () => [
       {
         id: "outdoor-store",
-        image: "/src/assets/img/img5.jpg",
+        image: "/assets/img/img5.jpg",
         title: "Cửa hàng dã ngoại",
         subtitle: "Lều và thảm dã ngoại ngoài trời",
         category: 6,
       },
       {
         id: "cooler-box",
-        image: "/src/assets/blog/2.png",
+        image: "/assets/blog/2.png",
         title: "Thùng Đá Giữ Nhiệt",
         subtitle: "Thùng đá xếp thương hiệu hàng đầu thế giới",
         category: 18,
