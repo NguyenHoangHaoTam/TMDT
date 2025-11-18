@@ -86,12 +86,18 @@ export async function getProductByCategoryId(id: string) {
 
 export async function getProductDetail(idOrSlug: string) {
   try {
-    const res = await publicApi.get<ApiResponse<TProductDetail>>(
-      `api/products/detail/${idOrSlug}`
-    );
+    const isNumber = /^\d+$/.test(idOrSlug); // true nếu là ID
+
+    const url = isNumber
+      ? `/api/products/detail/id/${idOrSlug}`
+      : `/api/products/detail/slug/${idOrSlug}`;
+
+    const res = await publicApi.get<ApiResponse<TProductDetail>>(url);
+
     if (res?.data?.code === 200) {
       return res.data.data;
     }
+
     toast.error("Lỗi không thể lấy chi tiết sản phẩm");
     return Promise.reject(new Error("Lỗi không thể lấy chi tiết sản phẩm"));
   } catch (e) {

@@ -24,7 +24,7 @@ const CardProduct = ({
         className
       )}
       onClick={() =>
-        navigate(`/products/${product?.slug || product?.id}`)
+        navigate(`/products/${product?.slug}`)
       }
     >
       <div className="relative overflow-hidden bg-gray-100 h-[270px] aspect-square flex items-center justify-center  group">
