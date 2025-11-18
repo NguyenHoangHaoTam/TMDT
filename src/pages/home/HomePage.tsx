@@ -1,5 +1,6 @@
 import { CarouselPlugin } from "@/components/common/home/header";
 import { listLogo } from "@/utils/constant";
+import { loadImage } from "@/utils/loadImage";
 import {
   Carousel,
   CarouselContent,
@@ -99,27 +100,27 @@ export default function HomePage() {
 
   const filterProducts = (products: TProductDetail[] | undefined): TProductDetail[] => {
     if (!products || !searchQuery.trim()) return products || [];
-    
+
     const searchTerms = searchQuery
       .toLowerCase()
       .trim()
       .split(/\s+/)
-      .filter(term => term.length >= 2); 
-    
+      .filter(term => term.length >= 2);
+
     if (searchTerms.length === 0) return [];
-    
+
     const isWordMatch = (text: string, term: string, isPrimary: boolean = false): boolean => {
       const lowerText = text.toLowerCase();
       const lowerTerm = term.toLowerCase();
-      
+
       const words = lowerText.split(/[\s\-_,.()\[\]{};:!?/\\|"'`~@#$%^&*+=<>]+/).filter(w => w.length > 0);
-      
+
       for (const word of words) {
         if (word === lowerTerm) {
           return true;
         }
       }
-      
+
       if (lowerTerm.length >= 4 && isPrimary) {
         for (const word of words) {
           if (word.startsWith(lowerTerm) && word.length >= lowerTerm.length + 1) {
@@ -130,24 +131,24 @@ export default function HomePage() {
           return true;
         }
       }
-      
-      
+
+
       return false;
     };
-    
+
     return products.filter((product) => {
       const name = (product.name || "").toLowerCase();
       const description = (product.description || "").toLowerCase();
       const categoryName = (product.categoryName || "").toLowerCase();
-      
-      const primaryMatches = searchTerms.filter((term) => 
+
+      const primaryMatches = searchTerms.filter((term) =>
         isWordMatch(name, term, true) || isWordMatch(categoryName, term, true)
       );
-      
+
       if (primaryMatches.length === 0) {
         return false;
       }
-      
+
 
       return searchTerms.every((term) => {
         if (isWordMatch(name, term, true) || isWordMatch(categoryName, term, true)) {
@@ -207,7 +208,7 @@ export default function HomePage() {
     () => [
       {
         id: "folding-furniture",
-        image: "/src/assets/img/img6.jpg",
+        image: loadImage("../assets/img/img6.jpg"),
         title: "Bàn Ghế Xếp Gọn Dã Ngoại - Cắm Trại",
         subtitle: "",
         buttonText: "XEM NGAY",
@@ -219,7 +220,7 @@ export default function HomePage() {
       },
       {
         id: "camp-cooking",
-        image: "/src/assets/img/img2.jpg",
+        image: loadImage("../assets/img/img2.jpg"),
         title: "Bếp Nồi Du Lịch",
         subtitle: "Cho hoạt động ngoài trời",
         buttonText: "CHI TIẾT",
@@ -231,7 +232,7 @@ export default function HomePage() {
       },
       {
         id: "hiking-backpack",
-        image: "/src/assets/img/img3.jpg",
+        image: loadImage("../assets/img/img3.jpg"),
         title: "Balo Leo Núi",
         subtitle: "Trợ lực & xếp gọn",
         buttonText: "CHI TIẾT",
@@ -288,22 +289,19 @@ export default function HomePage() {
               <img
                 src={card.image}
                 alt={card.title}
-                className={`w-full object-cover rounded-lg hover:scale-110 transition-transform duration-500 ${
-                  card.span ? "object-right" : ""
-                }`}
+                className={`w-full object-cover rounded-lg hover:scale-110 transition-transform duration-500 ${card.span ? "object-right" : ""
+                  }`}
               />
               <div
-                className={`absolute top-6 space-y-3 ${
-                  card.align === "center"
+                className={`absolute top-6 space-y-3 ${card.align === "center"
                     ? "left-1/2 -translate-x-1/2 text-center"
                     : "left-0 pl-4 text-left"
-                }`}
+                  }`}
               >
                 <div className="text-white">
                   <p
-                    className={`${
-                      card.span ? "text-3xl font-semibold" : "text-xl font-semibold"
-                    } uppercase`}
+                    className={`${card.span ? "text-3xl font-semibold" : "text-xl font-semibold"
+                      } uppercase`}
                   >
                     {card.title}
                   </p>
@@ -316,11 +314,10 @@ export default function HomePage() {
 
                 <div className="flex justify-center items-center">
                   <button
-                    className={`px-5 py-2 mx-auto text-lg cursor-pointer rounded-md transition-colors ${
-                      card.buttonVariant === "light"
+                    className={`px-5 py-2 mx-auto text-lg cursor-pointer rounded-md transition-colors ${card.buttonVariant === "light"
                         ? "bg-white/90 text-green-primary hover:bg-white"
                         : "bg-green-primary text-white hover:bg-green-primary/90"
-                    }`}
+                      }`}
                     onClick={() =>
                       handleNavigateHighlight(card.categoryId, card.searchFallback)
                     }
@@ -399,16 +396,16 @@ export default function HomePage() {
               {results?.[0]?.data?.[0]?.categoryName}
             </p>
 
-          <div>
-            <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-full  px-8 "
-            >
-              <CarouselContent className="p-0 ">
-                {results?.[0]?.isPending && results?.[1]?.isPending
-                  ? Array.from({ length: 5 }).map((_, index) => (
+            <div>
+              <Carousel
+                opts={{
+                  align: "start",
+                }}
+                className="w-full  px-8 "
+              >
+                <CarouselContent className="p-0 ">
+                  {results?.[0]?.isPending && results?.[1]?.isPending
+                    ? Array.from({ length: 5 }).map((_, index) => (
                       <CarouselItem
                         key={index}
                         className="md:basis-1/3 lg:basis-1/5 animate-fade-up"
@@ -422,7 +419,7 @@ export default function HomePage() {
                         </div>
                       </CarouselItem>
                     ))
-                  : results?.[0]?.data?.map((item) => (
+                    : results?.[0]?.data?.map((item) => (
                       <CarouselItem
                         key={item?.id}
                         className="md:basis-1/3 lg:basis-1/5  "
@@ -436,27 +433,27 @@ export default function HomePage() {
                         </div>
                       </CarouselItem>
                     ))}
-              </CarouselContent>
-              <CarouselPrevious className="  text-sm hover:bg-green-primary hover:text-white  duration-500 absolute top-1/2 bg-transparent p-1 left-1 z-10 border-none text-muted-foreground cursor-pointer" />
-              <CarouselNext className=" hover:bg-green-primary absolute top-1/2 duration-500 hover:text-white bg-transparent p-1 right-1 z-10 border-none text-muted-foreground cursor-pointer" />
-            </Carousel>
+                </CarouselContent>
+                <CarouselPrevious className="  text-sm hover:bg-green-primary hover:text-white  duration-500 absolute top-1/2 bg-transparent p-1 left-1 z-10 border-none text-muted-foreground cursor-pointer" />
+                <CarouselNext className=" hover:bg-green-primary absolute top-1/2 duration-500 hover:text-white bg-transparent p-1 right-1 z-10 border-none text-muted-foreground cursor-pointer" />
+              </Carousel>
+            </div>
           </div>
-        </div>
-        <div className="px-10 py-4">
-          <p className="text-2xl font-semibold mb-2 pl-8">
-            {results?.[1]?.data?.[0]?.categoryName}
-          </p>
+          <div className="px-10 py-4">
+            <p className="text-2xl font-semibold mb-2 pl-8">
+              {results?.[1]?.data?.[0]?.categoryName}
+            </p>
 
-          <div>
-            <Carousel
-              opts={{
-                align: "start",
-              }}
-              className="w-full  px-8 "
-            >
-              <CarouselContent className="p-0 ">
-                {results?.[0]?.isPending && results?.[1]?.isPending
-                  ? Array.from({ length: 5 }).map((_, index) => (
+            <div>
+              <Carousel
+                opts={{
+                  align: "start",
+                }}
+                className="w-full  px-8 "
+              >
+                <CarouselContent className="p-0 ">
+                  {results?.[0]?.isPending && results?.[1]?.isPending
+                    ? Array.from({ length: 5 }).map((_, index) => (
                       <CarouselItem
                         key={index}
                         className="md:basis-1/3 lg:basis-1/5 animate-fade-up"
@@ -470,7 +467,7 @@ export default function HomePage() {
                         </div>
                       </CarouselItem>
                     ))
-                  : results?.[1]?.data?.map((item) => (
+                    : results?.[1]?.data?.map((item) => (
                       <CarouselItem
                         key={item?.id}
                         className="md:basis-1/3 lg:basis-1/5  "
@@ -484,12 +481,12 @@ export default function HomePage() {
                         </div>
                       </CarouselItem>
                     ))}
-              </CarouselContent>
-              <CarouselPrevious className="  text-sm hover:bg-green-primary hover:text-white  duration-500 absolute top-1/2 bg-transparent p-1 left-1 z-10 border-none text-muted-foreground cursor-pointer" />
-              <CarouselNext className=" hover:bg-green-primary absolute top-1/2 duration-500 hover:text-white bg-transparent p-1 right-1 z-10 border-none text-muted-foreground cursor-pointer" />
-            </Carousel>
+                </CarouselContent>
+                <CarouselPrevious className="  text-sm hover:bg-green-primary hover:text-white  duration-500 absolute top-1/2 bg-transparent p-1 left-1 z-10 border-none text-muted-foreground cursor-pointer" />
+                <CarouselNext className=" hover:bg-green-primary absolute top-1/2 duration-500 hover:text-white bg-transparent p-1 right-1 z-10 border-none text-muted-foreground cursor-pointer" />
+              </Carousel>
+            </div>
           </div>
-        </div>
         </div>
       )}
 
